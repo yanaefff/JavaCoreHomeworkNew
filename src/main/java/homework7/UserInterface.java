@@ -1,5 +1,7 @@
 package homework7;
 
+import homework7.homework8.DataBaseConnection;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -17,10 +19,11 @@ public class UserInterface {
 
             System.out.println("Введите ответ: 1 - Получить текущую погоду, " +
                 "2 - Получить погоду на следующие 5 дней, " +
-                "3 - выход и завершить работу");
+                "3 - Выход и завершить работу, " + "4 - Получить данные из БД.");
             String result = scanner.nextLine();
 
             checkIsExit(result);
+            checkIsGetDataBase(result);
 
             try {
                 validateUserInput(result);
@@ -42,6 +45,14 @@ public class UserInterface {
         if (result.equals("3")) {
             System.out.println("Завершаю работу");
             System.exit(0);
+        }
+    }
+
+    private void checkIsGetDataBase(String result) {
+        if (result.equals("4")) {
+            System.out.println("Получаю результаты из базы данных");
+            DataBaseConnection dataBaseConnection = new DataBaseConnection();
+            dataBaseConnection.getTable();
         }
     }
 

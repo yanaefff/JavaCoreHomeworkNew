@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import homework7.enums.Periods;
+import homework7.homework8.DataBaseConnection;
+import homework7.homework8.WeatherData;
 import homework7.weather1d.WeatherResponse1day;
 import homework7.weather5d.WeatherResponse;
 import okhttp3.HttpUrl;
@@ -12,6 +14,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -102,9 +105,24 @@ public class AccuWeatherProvider implements WeatherProvider {
                         weatherList.getDailyForecasts().get(2).getTemperature().getMinimum().getValue() + " C, " +
                         weatherList.getDailyForecasts().get(3).getTemperature().getMinimum().getValue() + " C, " +
                         weatherList.getDailyForecasts().get(4).getTemperature().getMinimum().getValue() + " C.");
+
+                WeatherData weatherData = new WeatherData();
+                weatherData.setLocalDate(weatherList.getDailyForecasts().get(0).getDate());
+                weatherData.setText(weatherList.getHeadline().getText());
+                weatherData.setCity(weatherList.getHeadline().getCategory());
+                weatherData.setTemperature(weatherList.getDailyForecasts().get(0).getTemperature().getMaximum().getValue());
+
+                DataBaseConnection dataBaseConnection = new DataBaseConnection();
+                dataBaseConnection.createTableIfNotExists();
+                dataBaseConnection.saveWeatherData(weatherData);
+
+
+
             }
             catch (JsonProcessingException ex) {
                 ex.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
         }
