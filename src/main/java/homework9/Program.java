@@ -1,0 +1,30 @@
+package homework9;
+
+public enum Program {
+    MATH,
+    ENGLISH,
+    LITERATURE,
+    PE,
+    PHYSICS,
+    CHEMISTRY,
+    HISTORY,
+    BIOLOGY,
+    ART,
+    RUSSIAN,
+    CHINESE,
+    SPANISH,
+    DANCE,
+    ASTROLOGY,
+    CHESS,
+    PUBLIC_SPEAKING,
+    PHILOSOPHY,
+    PSYCHOLOGY,
+    COMPUTER_SCIENCE,
+    GEOGRAPHY,
+    LINGUISTICS,
+    ENTREPRENEURSHIP,
+    ENGINEERING,
+    SOCIOLOGY,
+    ECONOMICS
+}
+
